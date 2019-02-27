@@ -626,27 +626,28 @@ namespace fasttext {
         input_->uniform(1.0 / args_->dim);
 
         for (size_t i = 0; i < n; i++) {
-            int32_t idx = dict_->getId(words[i]);
-            if (idx < 0 || idx >= dict_->nwords()) continue;
-            for (size_t j = 0; j < dim; j++) {
-                input_->data_[idx * dim + j] = mat->data_[i * dim + j];
-            }
-            // ngram loading
-            if (!args_->pretrainedVectorsNgrams) {
-                continue;
-            }
-            uint32_t h = dict_->hash(words[i]) % args_->bucket;
-            if (dict_->pruneidx_size_ == 0 || h < 0) {
-                continue;
-            } else if (dict_->pruneidx_size_ > 0) {
-                if (dict_->pruneidx_.count(h)) {
-                    h = dict_->pruneidx_.at(h);
-                } else {
-                    continue;
+            if ((uint32_t)args_->loadTarget & (uint32_t)load_target::words) {
+                int32_t idx = dict_->getId(words[i]);
+                if (idx < 0 || idx >= dict_->nwords()) continue;
+                for (size_t j = 0; j < dim; j++) {
+                    input_->data_[idx * dim + j] = mat->data_[i * dim + j];
                 }
             }
-            for (size_t j = 0; j < dim; j++) {
-                input_->data_[h * dim + j] = mat->data_[i * dim + j];
+            // ngram loading
+            if ((uint32_t)args_->loadTarget & (uint32_t)load_target::ngrams) {
+                uint32_t h = dict_->hash(words[i]) % args_->bucket;
+                if (dict_->pruneidx_size_ == 0 || h < 0) {
+                    continue;
+                } else if (dict_->pruneidx_size_ > 0) {
+                    if (dict_->pruneidx_.count(h)) {
+                        h = dict_->pruneidx_.at(h);
+                    } else {
+                        continue;
+                    }
+                }
+                for (size_t j = 0; j < dim; j++) {
+                    input_->data_[h * dim + j] = mat->data_[i * dim + j];
+                }
             }
         }
     }
