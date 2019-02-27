@@ -27,6 +27,7 @@ namespace fasttext {
 
     struct entry {
         std::string word;
+        std::string hanjas;
         int64_t count;
         entry_type type;
         std::vector<int32_t> subwords;
@@ -62,6 +63,10 @@ namespace fasttext {
                     const std::vector<int32_t>& hashes,
                     int32_t n) const;
 
+            void split(
+                    const std::string &, 
+                    std::string &jasos, 
+                    std::string &hanjas) const;
 
         public:
             static const std::string EOS;
@@ -89,6 +94,7 @@ namespace fasttext {
                     std::vector<int32_t>&,
                     std::vector<std::string>&) const;
             uint32_t hash(const std::string& str) const;
+            uint32_t hash_ngram(const std::string& str) const;
             void add(const std::string&);
             bool readWord(std::istream&, std::string&) const;
             void readFromFile(std::istream&);
