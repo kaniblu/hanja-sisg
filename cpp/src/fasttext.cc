@@ -635,7 +635,7 @@ namespace fasttext {
             if (!args_->pretrainedVectorsNgrams) {
                 continue;
             }
-            uint32_t h = dict_->hash(words[i]) % args_->bucket;
+            uint32_t h = dict_->hash_ngram(words[i]) % args_->bucket;
             if (dict_->pruneidx_size_ == 0 || h < 0) {
                 continue;
             } else if (dict_->pruneidx_size_ > 0) {
