@@ -614,7 +614,9 @@ namespace fasttext {
             std::string word;
             in >> word;
             words.push_back(word);
-            dict_->add(word);
+            if ((uint32_t)args_->loadTarget & (uint32_t)load_target::words) {
+                dict_->add(word);
+            }
             for (size_t j = 0; j < dim; j++) {
                 in >> mat->data_[i * dim + j];
             }

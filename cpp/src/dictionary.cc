@@ -44,6 +44,10 @@ namespace fasttext {
                         jasos.push_back(word[i++]);
                     }
                 }
+                if (isalpha(word[i]) && word[i] == args_->emptyhjchar[0]) {
+                    ++i;
+                    continue;
+                }
                 hanjas.push_back(word[i++]);
                 while (i < word.size() && (word[i] & 0xC0) == 0x80) {
                     hanjas.push_back(word[i++]);
