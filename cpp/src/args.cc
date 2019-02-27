@@ -39,7 +39,7 @@ namespace fasttext {
         label = "__label__";
         verbose = 2;
         pretrainedVectors = "";
-        pretrainedVectorsNgrams = false;
+        loadTarget = load_target::words;
         saveOutput = 0;
 
         qout = false;
@@ -47,6 +47,18 @@ namespace fasttext {
         qnorm = false;
         cutoff = 0;
         dsub = 2;
+    }
+
+    std::string Args::loadTargetToString(load_target lt) {
+        switch (lt) {
+            case load_target::words:
+                return "words";
+            case load_target::ngrams:
+                return "ngrams";
+            case load_target::both:
+                return "both";
+        }
+        return "Unknown load target!";
     }
 
     std::string Args::lossToString(loss_name ln) {
@@ -150,8 +162,18 @@ namespace fasttext {
                 verbose = std::stoi(args[ai + 1]);
             } else if (args[ai] == "-pretrainedVectors") {
                 pretrainedVectors = std::string(args[ai + 1]);
-            } else if (args[ai] == "-pretrainedVectorsNgrams") {
-                pretrainedVectorsNgrams = true; ai--;
+            } else if (args[ai] == "-loadTarget") {
+                if (args[ai + 1] == "words") {
+                    loadTarget = load_target::words;
+                } else if (args[ai + 1] == "ngrams") {
+                    loadTarget = load_target::ngrams;
+                } else if (args[ai + 1] == "both") {
+                    loadTarget = load_target::both;
+                } else {
+                    std::cerr << "Unknown load target: " << args[ai + 1] << std::endl;
+                    printHelp();
+                    exit(EXIT_FAILURE);
+                }
             } else if (args[ai] == "-saveOutput") {
                 saveOutput = std::stoi(args[ai + 1]);
             } else if (args[ai] == "-qnorm") {
@@ -228,7 +250,7 @@ namespace fasttext {
             << "  -loss               loss function {ns, hs, softmax} [" << lossToString(loss) << "]\n"
             << "  -thread             number of threads [" << thread << "]\n"
             << "  -pretrainedVectors  pretrained word vectors for supervised learning ["<< pretrainedVectors <<"]\n"
-            << "  -pretrainedVectorsNgrams load pretrained word vectors to ngrams ["<< pretrainedVectorsNgrams <<"]\n"
+            << "  -loadTarget         target to load pretrained vectors {words, ngrams, both} ["<< loadTargetToString(loadTarget) <<"]\n"
             << "  -saveOutput         whether output params should be saved [" << saveOutput << "]\n";
     }
 

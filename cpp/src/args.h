@@ -18,10 +18,12 @@ namespace fasttext {
 
     enum class model_name : int {cbow=1, sg, sup};
     enum class loss_name : int {hs=1, ns, softmax};
+    enum class load_target : int {words=0x1, ngrams=0x2, both=0x3};
 
     class Args {
         protected:
             std::string lossToString(loss_name);
+            std::string loadTargetToString(load_target);
 
         public:
             Args();
@@ -52,7 +54,7 @@ namespace fasttext {
             std::string label;
             int verbose;
             std::string pretrainedVectors;
-            bool pretrainedVectorsNgrams;
+            load_target loadTarget;
             int saveOutput;
 
             bool qout;
