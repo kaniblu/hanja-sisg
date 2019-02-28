@@ -49,7 +49,7 @@ namespace fasttext {
             int minjn;
             int maxjn;
             std::string emptyjschar;
-            std::string emptyhjchar;
+            std::string hanjaBracket;
             int thread;
             double t;
             std::string label;

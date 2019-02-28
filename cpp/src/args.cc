@@ -33,7 +33,7 @@ namespace fasttext {
         minjn = 3;
         maxjn = 5;
         emptyjschar = "e";
-        emptyhjchar = "h";
+        hanjaBracket = "()";
         thread = 12;
         lrUpdateRate = 100;
         t = 1e-4;
@@ -109,8 +109,8 @@ namespace fasttext {
                 output = std::string(args[ai + 1]);
             } else if (args[ai] == "-emptyjschar") {
                 emptyjschar = std::string(args[ai + 1]);
-            } else if (args[ai] == "-emptyhjchar") {
-                emptyhjchar = std::string(args[ai + 1]);
+            } else if (args[ai] == "-hanjaBracket") {
+                hanjaBracket = std::string(args[ai + 1]);
             } else if (args[ai] == "-lr") {
                 lr = std::stof(args[ai + 1]);
             } else if (args[ai] == "-lrUpdateRate") {
@@ -237,7 +237,7 @@ namespace fasttext {
             << "  -minjn              min length of jamo ngram [" << minjn << "]\n"
             << "  -maxjn              max length of jamo ngram [" << maxjn << "]\n"
             << "  -emptyjschar        empty jongsung symbol. (type:char) [" << emptyjschar << "]\n"
-            << "  -emptyhjchar        empty hanja symbol. (type:char) [" << emptyhjchar << "]\n"
+            << "  -hanjaBracket       hanja bracket characters. (type:string) [" << hanjaBracket << "]\n"
             << "  -t                  sampling threshold [" << t << "]\n"
             << "  -label              labels prefix [" << label << "]\n";
     }

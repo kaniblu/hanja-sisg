@@ -27,7 +27,6 @@ namespace fasttext {
 
     struct entry {
         std::string word;
-        std::string hanjas;
         int64_t count;
         entry_type type;
         std::vector<int32_t> subwords;
@@ -66,7 +65,7 @@ namespace fasttext {
             void split(
                     const std::string &, 
                     std::string &jasos, 
-                    std::string &hanjas) const;
+                    std::vector<std::string> &hanjas) const;
 
         public:
             static const std::string EOS;

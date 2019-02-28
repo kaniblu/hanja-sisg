@@ -30,13 +30,26 @@ namespace fasttext {
     void Dictionary::split(
             const std::string &word, 
             std::string &jasos, 
-            std::string &hanjas) const {
+            std::vector<std::string> &hanjas) const {
+
         for (size_t i = 0; i < word.size(); ) {
             if (word[i] == BOW[0] || word[i] == EOW[0]) {
-                jasos.push_back(word[i]);
-                hanjas.push_back(word[i++]);
-            } else if (!(word[i] & 0x80) && word[i] != args_-> emptyjschar[0]) {
                 jasos.push_back(word[i++]);
+            } else if (isalpha(word[i]) && word[i] != args_-> emptyjschar[0]) {
+                jasos.push_back(word[i++]);
+            } else if (word[i] == args_->hanjaBracket[0]) {
+                ++i;
+                std::string hanja;
+                hanja.append(BOW);
+                while (i < word.size() && (word[i] != args_->hanjaBracket[1])) {
+                    hanja.push_back(word[i++]);
+                    while (i < word.size() && (word[i] & 0xC0) == 0x80) {
+                        hanja.push_back(word[i++]);
+                    }
+                }
+                hanja.append(EOW);
+                hanjas.push_back(hanja);
+                ++i;
             } else {
                 for (size_t n = 0; n < 3 && i < word.size(); ++n) {
                     jasos.push_back(word[i++]);
@@ -44,14 +57,7 @@ namespace fasttext {
                         jasos.push_back(word[i++]);
                     }
                 }
-                if (isalpha(word[i]) && word[i] == args_->emptyhjchar[0]) {
-                    ++i;
-                    continue;
-                }
-                hanjas.push_back(word[i++]);
-                while (i < word.size() && (word[i] & 0xC0) == 0x80) {
-                    hanjas.push_back(word[i++]);
-                }
+                
             }
         }
     }
@@ -62,9 +68,7 @@ namespace fasttext {
 
     int32_t Dictionary::find(const std::string& w, uint32_t h) const {
         int32_t id = h % MAX_VOCAB_SIZE;
-        std::string jasos, hanjas;
-        split(w, jasos, hanjas);
-        while (word2int_[id] != -1 && words_[word2int_[id]].word != jasos) {
+        while (word2int_[id] != -1 && words_[word2int_[id]].word != w) {
             id = (id + 1) % MAX_VOCAB_SIZE;
         }
         return id;
@@ -73,12 +77,9 @@ namespace fasttext {
     void Dictionary::add(const std::string& w) {
         int32_t h = find(w);
         ntokens_++;
-        std::string jasos, hanjas;
-        split(w, jasos, hanjas);
         if (word2int_[h] == -1) {
             entry e;
-            e.hanjas = hanjas;
-            e.word = jasos;
+            e.word = w; 
             e.count = 1;
             e.type = getType(w);
             words_.push_back(e);
@@ -164,11 +165,9 @@ namespace fasttext {
     }
 
     uint32_t Dictionary::hash(const std::string &str) const {
-        std::string jasos, hanjas;
-        split(str, jasos, hanjas);
         uint32_t h = 2166136261;
-        for (size_t i = 1; i < jasos.size(); i++) {
-            h = h ^ uint32_t(jasos[i]);
+        for (size_t i = 1; i < str.size(); i++) {
+            h = h ^ uint32_t(str[i]);
             h = h * 16777619;
         }
         return h;
@@ -188,26 +187,37 @@ namespace fasttext {
             std::vector<int32_t>& ngrams,
             std::vector<std::string>* substrings) const {
 
-        std::string hanjas, wordkr;
+        std::vector<std::string> hanjas;
+        std::string wordkr;
         split(word, wordkr, hanjas);
 
-        // Hanja N-Grams
-        for (size_t i = 0, n = 0; i < hanjas.size(); ++i) {
-            if ((hanjas[i] & 0xC0) == 0x80) {
-                continue;
-            }
+        std::cout << "word: " << word << std::endl 
+                  << "num hanjas: " << hanjas.size() << std::endl;
 
-            std::string ngram;
-            for (size_t j = i, n = 1; j < hanjas.size() && n <= args_->maxhn; ++n) {
-                ngram.push_back(hanjas[j++]);
-                while (j < hanjas.size() && (hanjas[j] & 0xC0) == 0x80) {
-                    ngram.push_back(hanjas[j++]);
+        for (size_t i = 0; i < hanjas.size(); ++i) {
+            std::cout << "hanjas[" << i << "]: " << hanjas[i] << std::endl;
+        }
+        std::cout << "wordkr: " << wordkr << std::endl << std::endl;;
+
+        // Hanja N-Grams
+        for (size_t k = 0; k < hanjas.size(); ++k) {
+            std::string &hanja = hanjas[k];
+            for (size_t i = 0, n = 0; i < hanja.size(); ++i) {
+                if ((hanja[i] & 0xC0) == 0x80) {
+                    continue;
                 }
-                if (n >= args_->minhn && !(n == 1 && (i == 0 || j == hanjas.size()))) {
-                    int32_t h = hash_ngram(ngram) % args_->bucket;
-                    pushHash(ngrams, h);
-                    if (substrings) {
-                        substrings->push_back(ngram);
+                std::string ngram;
+                for (size_t j = i, n = 1; j < hanja.size() && n <= args_->maxhn; ++n) {
+                    ngram.push_back(hanja[j++]);
+                    while (j < hanja.size() && (hanja[j] & 0xC0) == 0x80) {
+                        ngram.push_back(hanja[j++]);
+                    }
+                    if (n >= args_->minhn && !(n == 1 && (i == 0 || j == hanja.size()))) {
+                        int32_t h = hash_ngram(ngram) % args_->bucket;
+                        pushHash(ngrams, h);
+                        if (substrings) {
+                            substrings->push_back(ngram);
+                        }
                     }
                 }
             }
