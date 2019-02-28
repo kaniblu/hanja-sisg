@@ -191,14 +191,6 @@ namespace fasttext {
         std::string wordkr;
         split(word, wordkr, hanjas);
 
-        std::cout << "word: " << word << std::endl 
-                  << "num hanjas: " << hanjas.size() << std::endl;
-
-        for (size_t i = 0; i < hanjas.size(); ++i) {
-            std::cout << "hanjas[" << i << "]: " << hanjas[i] << std::endl;
-        }
-        std::cout << "wordkr: " << wordkr << std::endl << std::endl;;
-
         // Hanja N-Grams
         for (size_t k = 0; k < hanjas.size(); ++k) {
             std::string &hanja = hanjas[k];
