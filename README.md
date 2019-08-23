@@ -52,9 +52,9 @@ used to infer word vectors for unseen words using `fasttext` executable.
 | Name | Options | bin | vec | vec (syllables) |
 | ---- | ------- | --- | --- | --------------- |
 | `SISG(c)` | jamo n-gram = 0; hanja n-gram = 0 | [link]() | [link]() | [link]() |
-| `SISG(cj)` | jamo n-gram = 3~5; hanja n-gram = 0 | [link]() | [link]() | [link]() |
-| `SISG(cjh3)` | jamo n-gram = 3~5; hanja n-gram = 1~3 | [link]() | [link]() | [link]() |
-| `SISG(cjh4)` | jamo n-gram = 3~5; hanja n-gram = 1~4 | [link]() | [link]() | [link]() |
+| `SISG(cj)` | jamo n-gram = 3-5; hanja n-gram = 0 | [link]() | [link]() | [link]() |
+| `SISG(cjh3)` | jamo n-gram = 3-5; hanja n-gram = 1-3 | [link]() | [link]() | [link]() |
+| `SISG(cjh4)` | jamo n-gram = 3-5; hanja n-gram = 1-4 | [link]() | [link]() | [link]() |
 
 ## Citation ##
 
