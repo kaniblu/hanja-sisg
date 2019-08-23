@@ -33,7 +33,7 @@ Here, `minhn`, `maxhn`, `pretrainedVectors` are options specific to this work.
   * `minhn`, `maxhn`: minimum and maximum bounds for Hanja n-grams to consider for subword information skip-gram.
   * `pretrainedVectors`: n-grams embeddings to initialize from.
 
-Unfortunately, the corpus we used to train our model is unavailable from us due to 
+Unfortunately, the corpus we used to train our model can't be made available due to 
 license issues. Inquire corresponding authors (kangminyoo@europa.snu.ac.kr, taeuk@europa.snu.ac.kr)
 for more information on reproducibility.
 
