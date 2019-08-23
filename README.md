@@ -27,10 +27,10 @@ Line above was preprocessed and annotated from the original sentence `롯데건�
 
 With those two datasets ready, run `fasttext skipgram` with the following options:
 
-    ./fasttext skipgram -minCount 10 -bucket 20000000 -minn 1 -maxn 4 -minjn 3 \\
+    ./fasttext skipgram -minCount 10 -bucket 20000000 -minn 1 -maxn 6 -minjn 3 \\
                         -maxjn 5 -emptyjschar e -t 0.0001 -lr 0.05 -dim 300 \\
                         -ws 5 -loss ns -neg 5 -epoch 5 -thread 8 -verbose 2 \\
-                        -minhn 1 -maxhn 3 -pretrainedVectors <path-to-cn-word2vec-mixedlarge-300d.txt> \\
+                        -minhn 1 -maxhn 4 -pretrainedVectors <path-to-cn-word2vec-mixedlarge-300d.txt> \\
                         -loadTarget ngrams -input <path-to-hanja-corpus> \\
                         -output <path-to-output>
 
