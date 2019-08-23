@@ -60,9 +60,10 @@ used to infer word vectors for unseen words using `fasttext` executable.
 
 If you use our work, please cite the paper or the code using the following BibTex entry:
 
-    TODO
+    Coming Soon
 
 or 
+
     @misc{yookim2019,
       author =       {Kang Min Yoo and Taeuk Kim and Sang-goo Lee},
       title =        {Hanja-level SISG},
