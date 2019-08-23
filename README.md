@@ -57,10 +57,10 @@ used to infer word vectors for unseen words using `fasttext` executable compiled
 
 | Name | Options | bin | vec | vec (syllables) |
 | ---- | ------- | --- | --- | --------------- |
-| `SISG(c)` | char n-gram: 1-6; jamo n-gram: 0; hanja n-gram: 0 | [link]() | [link]() | [link]() |
-| `SISG(cj)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 0 | [link]() | [link]() | [link]() |
-| `SISG(cjh3)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 1-3 | [link]() | [link]() | [link]() |
-| `SISG(cjh4)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 1-4 | [link]() | [link]() | [link]() |
+| `SISG(c)` | char n-gram: 1-6; jamo n-gram: 0; hanja n-gram: 0 | [link](https://drive.google.com/file/d/1RVf_T96zFoeZvtROheYw_lCDZhxlvEkE/view?usp=sharing) | [link](https://drive.google.com/file/d/1KARmGNCd5Zon8vvi8Pqxdg0K1hBZP6Y7/view?usp=sharing) | [link](https://drive.google.com/file/d/1MRdnrsEKPrwiep2Kp2EgdDJ5u7dT5ezN/view?usp=sharing) |
+| `SISG(cj)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 0 | [link](https://drive.google.com/file/d/1rCsASaysfjC6IO9M7BPR5kffTzMj5CMh/view?usp=sharing) | [link](https://drive.google.com/file/d/10AvgUdLuws5RSh8lClkTr7IkBPijxDW7/view?usp=sharing) | [link](https://drive.google.com/file/d/16wyQFJILa-8XiY6A_E3oT7vDXzhc-ggf/view?usp=sharing) |
+| `SISG(cjh3)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 1-3 | [link](https://drive.google.com/file/d/1Ch6EhGp-qmz_AoAQ065zhh37r3QV62TP/view?usp=sharing) | [link](https://drive.google.com/file/d/1xaz6KWmg-tRT7ZQKzYrlsQ0b-oAKvkJt/view?usp=sharing) | [link](https://drive.google.com/file/d/1UK8KpGN3yRKaYJ3J0qK-WWZvLJBLjPOg/view?usp=sharing) |
+| `SISG(cjh4)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 1-4 | [link](https://drive.google.com/file/d/11457297D798Ptf4Qp1hvBODCS3kcGCef/view?usp=sharing) | [link](https://drive.google.com/file/d/1plQSExbM_aZOaYkbpGRMbxzotcZscPNd/view?usp=sharing) | [link](https://drive.google.com/file/d/15mFBxTcUElZMte83asOP111kff5XRCTA/view?usp=sharing) |
 
 ## Citation ##
 
