@@ -16,8 +16,14 @@ Compile the source code in `cpp` directory first:
 To train a Hanja-aware Subword Information Skip-gram from the scratch, you
 need to prepare two datasets:
   
-  1. a Hanja-annotated Korean corpus tagged using an appropriate tool such as [hanja-tagger](https://github.com/kaniblu/hanja-tagger). The corpus must also be split into [**jamo**](https://en.wikipedia.org/wiki/List_of_Hangul_jamo).
+  1. a Hanja-annotated Korean corpus tagged using an appropriate tool such as [hanja-tagger](https://github.com/kaniblu/hanja-tagger). The corpus must also be split into [**jamo**](https://en.wikipedia.org/wiki/List_of_Hangul_jamo), in which each empty jongsong (final consonant) must be padded with the character `e`.
   2. and Chinese character embeddings such as [Chinese word vectors](https://github.com/Embedding/Chinese-Word-Vectors) made available by Li et al.
+
+An example line of the corpus described in (1.) is as follows.
+
+    ㄹㅗㅅㄷㅔeㄱㅓㄴㅅㅓㄹㅇㅔe ㅍㅐe(败)ㅎㅏㄴ ㅁㅣeㅅㅓㅇㅋㅡeㄹㅗeㅂㅏe ㅈㅐeㄱㅓㄴㅊㅜㄱ(再建筑) ...
+
+Line above was preprocessed and annotated from the original sentence `롯데건설에 패한 미성크로바 재건축 ...`.
 
 With those two datasets ready, run `fasttext skipgram` with the following options:
 
@@ -40,10 +46,10 @@ for more information on reproducibility.
 
 ## Pre-trained Models ##
 
-We provide pretrained Hanja-SISG embeddings trained using the following datasets:
+We provide Hanja-SISG embeddings trained using the following datasets:
 
-    1. A comprehensive Korean corpus with a mixture of wikipedia, web-crawled news articles, and Sejong corpus
-    2. Chinese SGNS word2vec provided by [link](https://github.com/Embedding/Chinese-Word-Vectors) (Mixed-large / Word + Character + Ngram).
+1. A comprehensive Korean corpus with a mixture of wikipedia, web-crawled news articles, and Sejong corpus
+2. Chinese SGNS word2vec provided by [link](https://github.com/Embedding/Chinese-Word-Vectors) (Mixed-large / Word + Character + Ngram).
 
 For each configuration, we make three items available: the binary model file, the word2vec file and the word2vec with
 words transformed into syllables (e.g. "ㅇㅏㄴ" -> "안"). The binary model file can be
