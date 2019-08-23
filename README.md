@@ -1,4 +1,4 @@
-# Hanja-aware Korean Subword Representations #
+# Hanja-aware Korean Word Representations #
 
 This is the training code for ["Don't Just Scratch the Surface: Enhancing Word Representations for Korean with Hanja"](https://coming-soon).
 The code is based on [FastText](https://github.com/facebookresearch/fasttext), with an additional functionality to take Hanja-annotated texts and perform Hanja-level skip-gram learning.
@@ -42,22 +42,30 @@ for more information on reproducibility.
 
 We provide pretrained Hanja-SISG embeddings trained using the following datasets:
 
-    1. A web-crawl Korean corpus with a mixture of wikipedia, news articles, Sejong corpus
+    1. A web-crawled Korean corpus with a mixture of wikipedia, news articles, Sejong corpus
     2. Chinese SGNS word2vec provided by [link](https://github.com/Embedding/Chinese-Word-Vectors) (Mixed-large / Word + Character + Ngram).
 
 For each configuration, the binary model file, the word2vec file and the word2vec with
 words transformed into syllables (e.g. "ㅇㅏㄴ" -> "안"). The binary model file can be
 used to infer word vectors for unseen words using `fasttext` executable.
 
-<table align="center">
-    <th>
-        <td>Name</td>
-        <td>Options</td>
-        <td>Binary</td>
-        <td>Vectors</td>
-        <td>Vectors (Syllables)</td>
-    </th>
-</table>
+| Name | Options | bin | vec | vec (syllables) |
+| ---- | ------- | --- | --- | --------------- |
+| `SISG(c)` | jamo n-gram = 0; hanja n-gram = 0 | [link]() | [link]() | [link]() |
+| `SISG(cj)` | jamo n-gram = 3~5; hanja n-gram = 0 | [link]() | [link]() | [link]() |
+| `SISG(cjh3)` | jamo n-gram = 3~5; hanja n-gram = 1~3 | [link]() | [link]() | [link]() |
+| `SISG(cjh4)` | jamo n-gram = 3~5; hanja n-gram = 1~4 | [link]() | [link]() | [link]() |
 
 ## Citation ##
 
+If you use our work, please cite the paper or the code using the following BibTex entry:
+
+    TODO
+
+or 
+    @misc{yookim2019,
+      author =       {Kang Min Yoo and Taeuk Kim and Sang-goo Lee},
+      title =        {Hanja-level SISG},
+      howpublished = {\url{https://github.com/kaniblu/hanja-sisg}},
+      year =         {2019}
+    }
