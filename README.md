@@ -21,12 +21,12 @@ need to prepare two datasets:
 
 With those two datasets ready, run `fasttext skipgram` with the following options:
 
-   ./fasttext skipgram -minCount 10 -bucket 20000000 -minn 1 -maxn 4 -minjn 3 \\
-                       -maxjn 5 -emptyjschar e -t 0.0001 -lr 0.05 -dim 300 \\
-                       -ws 5 -loss ns -neg 5 -epoch 5 -thread 8 -verbose 2 \\
-                       -minhn 1 -maxhn 3 -pretrainedVectors <path-to-cn-word2vec-mixedlarge-300d.txt> \\
-                       -loadTarget ngrams -input <path-to-hanja-corpus> \\
-                       -output <path-to-output>
+    ./fasttext skipgram -minCount 10 -bucket 20000000 -minn 1 -maxn 4 -minjn 3 \\
+                        -maxjn 5 -emptyjschar e -t 0.0001 -lr 0.05 -dim 300 \\
+                        -ws 5 -loss ns -neg 5 -epoch 5 -thread 8 -verbose 2 \\
+                        -minhn 1 -maxhn 3 -pretrainedVectors <path-to-cn-word2vec-mixedlarge-300d.txt> \\
+                        -loadTarget ngrams -input <path-to-hanja-corpus> \\
+                        -output <path-to-output>
 
 Here, `minhn`, `maxhn`, `pretrainedVectors` are options specific to this work.
 
@@ -42,19 +42,19 @@ for more information on reproducibility.
 
 We provide pretrained Hanja-SISG embeddings trained using the following datasets:
 
-    1. A web-crawled Korean corpus with a mixture of wikipedia, news articles, Sejong corpus
+    1. A comprehensive Korean corpus with a mixture of wikipedia, web-crawled news articles, and Sejong corpus
     2. Chinese SGNS word2vec provided by [link](https://github.com/Embedding/Chinese-Word-Vectors) (Mixed-large / Word + Character + Ngram).
 
-For each configuration, the binary model file, the word2vec file and the word2vec with
+For each configuration, we make three items available: the binary model file, the word2vec file and the word2vec with
 words transformed into syllables (e.g. "ㅇㅏㄴ" -> "안"). The binary model file can be
-used to infer word vectors for unseen words using `fasttext` executable.
+used to infer word vectors for unseen words using `fasttext` executable compiled from this repository.
 
 | Name | Options | bin | vec | vec (syllables) |
 | ---- | ------- | --- | --- | --------------- |
-| `SISG(c)` | jamo n-gram = 0; hanja n-gram = 0 | [link]() | [link]() | [link]() |
-| `SISG(cj)` | jamo n-gram = 3-5; hanja n-gram = 0 | [link]() | [link]() | [link]() |
-| `SISG(cjh3)` | jamo n-gram = 3-5; hanja n-gram = 1-3 | [link]() | [link]() | [link]() |
-| `SISG(cjh4)` | jamo n-gram = 3-5; hanja n-gram = 1-4 | [link]() | [link]() | [link]() |
+| `SISG(c)` | char n-gram: 1-6; jamo n-gram: 0; hanja n-gram: 0 | [link]() | [link]() | [link]() |
+| `SISG(cj)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 0 | [link]() | [link]() | [link]() |
+| `SISG(cjh3)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 1-3 | [link]() | [link]() | [link]() |
+| `SISG(cjh4)` | char n-gram: 1-6; jamo n-gram: 3-5; hanja n-gram: 1-4 | [link]() | [link]() | [link]() |
 
 ## Citation ##
 
