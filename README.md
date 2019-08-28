@@ -1,6 +1,6 @@
 # Hanja-aware Korean Word Representations #
 
-This is the training code for ["Don't Just Scratch the Surface: Enhancing Word Representations for Korean with Hanja"](https://coming-soon).
+This is the training code for ["Don't Just Scratch the Surface: Enhancing Word Representations for Korean with Hanja"](https://arxiv.org/abs/1908.09282).
 The code is based on [FastText](https://github.com/facebookresearch/fasttext), with an additional functionality to take Hanja-annotated texts and perform Hanja-level skip-gram learning.
 
 **Hanja** exists in parallel to the more commonly used **Hangul**, the Korean alphabet. Hanja shares many roots to the Chinese characters, and thus provides rich insights to the meaning of Korean words and also help to reduce ambiguity in Korean texts.
@@ -66,7 +66,12 @@ used to infer word vectors for unseen words using `fasttext` executable compiled
 
 If you use our work, please cite the paper or the code using the following BibTex entry:
 
-    Coming Soon
+    @article{yookim2019enhancing,
+      title={Don't Just Scratch the Surface: Enhancing Word Representations for Korean with Hanja},
+      author={Kang Min Yoo and Taeuk Kim and Sang-goo Lee},
+      journal={arXiv preprint arXiv:1908.09282},
+      year={2019}
+    }
 
 or 
 
